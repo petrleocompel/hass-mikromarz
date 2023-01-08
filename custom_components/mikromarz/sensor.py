@@ -1,6 +1,7 @@
 """GitHub sensor platform."""
 from datetime import timedelta, datetime
 import logging
+from homeassistant.components.sensor.const import SensorStateClass
 
 from homeassistant.core import callback
 from homeassistant.helpers.entity import DeviceInfo
@@ -82,7 +83,7 @@ class MikromarzPower(CoordinatorEntity, SensorEntity):
             name="NT3-DN4",
         )
 
-    def __init__(self, coordinator: MikromarzDataUpdateCoordinator, value_index: ValIndex, name: str) -> None:
+    def __init__(self, coordinator: MikromarzDataUpdateCoordinator, value_index: ValIndex, name: str, is_total: bool = False) -> None:
         """Create the entity with a DataUpdateCoordinator."""
         super().__init__(coordinator)
         self._ref_id = coordinator.api.ip
@@ -92,6 +93,10 @@ class MikromarzPower(CoordinatorEntity, SensorEntity):
         self._val_index = value_index
         self._name = name
         self._attr_has_entity_name = True
+        if is_total:
+            self._attr_state_class = SensorStateClass.TOTAL
+        else:
+            self._attr_state_class = SensorStateClass.MEASUREMENT
 
     @property
     def name(self) -> str:
@@ -126,7 +131,7 @@ class MikromarzEnergy(CoordinatorEntity, SensorEntity):
             name="NT3-DN4",
         )
 
-    def __init__(self, coordinator: MikromarzDataUpdateCoordinator, value_index: ValIndex, name: str) -> None:
+    def __init__(self, coordinator: MikromarzDataUpdateCoordinator, value_index: ValIndex, name: str, is_total: bool = False) -> None:
         """Create the entity with a DataUpdateCoordinator."""
         super().__init__(coordinator)
         self._ref_id = coordinator.api.ip
@@ -136,6 +141,10 @@ class MikromarzEnergy(CoordinatorEntity, SensorEntity):
         self._val_index = value_index
         self._name = name
         self._attr_has_entity_name = True
+        if is_total:
+            self._attr_state_class = SensorStateClass.TOTAL
+        else:
+            self._attr_state_class = SensorStateClass.MEASUREMENT
 
     @property
     def name(self) -> str:
