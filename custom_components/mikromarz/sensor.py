@@ -1,14 +1,13 @@
 """GitHub sensor platform."""
 from datetime import timedelta, datetime
 import logging
-from homeassistant.components.sensor.const import SensorStateClass
 
 from homeassistant.core import callback
 from homeassistant.helpers.entity import DeviceInfo
 
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant import config_entries, core
-from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
+from homeassistant.components.sensor import SensorEntity, SensorDeviceClass, SensorStateClass
 import voluptuous as vol
 from . import MikromarzDataUpdateCoordinator
 from homeassistant.helpers import device_registry as dr
