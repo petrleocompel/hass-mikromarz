@@ -93,7 +93,7 @@ class MikromarzPower(CoordinatorEntity, SensorEntity):
         self._name = name
         self._attr_has_entity_name = True
         if is_total:
-            self._attr_state_class = SensorStateClass.TOTAL
+            self._attr_state_class = SensorStateClass.TOTAL_INCREASING
         else:
             self._attr_state_class = SensorStateClass.MEASUREMENT
 
@@ -141,7 +141,7 @@ class MikromarzEnergy(CoordinatorEntity, SensorEntity):
         self._name = name
         self._attr_has_entity_name = True
         if is_total:
-            self._attr_state_class = SensorStateClass.TOTAL
+            self._attr_state_class = SensorStateClass.TOTAL_INCREASING
         else:
             self._attr_state_class = SensorStateClass.MEASUREMENT
 
